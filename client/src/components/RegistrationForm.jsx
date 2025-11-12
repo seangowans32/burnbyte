@@ -19,6 +19,12 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+
+    if (password !== retypePassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -33,6 +39,11 @@ const RegistrationForm = () => {
       setUsername('');
       setEmail('');
       setPassword('');
+
+      if (response.user) {
+        localStorage.setItem('user', JSON.stringify(response.user));
+        window.dispatchEvent(new Event('authChange'));
+      }
     } catch (error) {
       setMessage(error.message || 'Registration failed. Please try again.');
     } finally {
