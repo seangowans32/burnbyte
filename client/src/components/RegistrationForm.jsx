@@ -7,6 +7,7 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [retypePassword, setRetypePassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,6 +83,17 @@ const RegistrationForm = () => {
                   required 
                 />
               </div>
+
+              <div className='form-group'>
+                <input
+                  type="password" 
+                  value={retypePassword}
+                  onChange={(e) => setRetypePassword(e.target.value)}
+                  placeholder='Retype Password' 
+                  required 
+                />
+              </div>
+
 
               <button className='frontend-button' type='submit' disabled={isLoading}>
                 {isLoading ? 'Registering...' : 'Register'}
