@@ -9,4 +9,9 @@ export default defineConfig({
       'comp229-3mmr.onrender.com'
     ],
   },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
 })

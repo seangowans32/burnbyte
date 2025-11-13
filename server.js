@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -8,6 +9,7 @@ import app from "./server/express.js";
 import userRoutes from "./server/routes/user.routes.js";
 import authRoutes from "./server/routes/auth.routes.js";
 import { startDailyResetScheduler } from "./server/helpers/dailyResetScheduler.js";
+
 
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
