@@ -7,6 +7,7 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [retypePassword, setRetypePassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,6 +21,11 @@ const RegistrationForm = () => {
     setMessage('');
     setIsLoading(true);
 
+    if (password !== retypePassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
     try {
       const response = await AuthAPI.register({
         username,
@@ -32,6 +38,7 @@ const RegistrationForm = () => {
       setUsername('');
       setEmail('');
       setPassword('');
+      setRetypePassword('');
     } catch (error) {
       setMessage(error.message || 'Registration failed. Please try again.');
     } finally {
@@ -79,6 +86,16 @@ const RegistrationForm = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder='Password' 
+                  required 
+                />
+              </div>
+
+              <div className='form-group'>
+                <input
+                  type="password" 
+                  value={retypePassword}
+                  onChange={(e) => setRetypePassword(e.target.value)}
+                  placeholder='Retype Password' 
                   required 
                 />
               </div>
