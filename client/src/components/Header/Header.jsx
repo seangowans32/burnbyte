@@ -24,24 +24,28 @@ export default function Header() {
 
   return (
     <header className="header">
-      {/* LEFT SIDE — LOGO */}
-      <Link to="/">
-        <img src={logo} alt="BurnByte Logo" className="header-logo" />
-      </Link>
+      <div className="container">
+        {/* LEFT SIDE — LOGO */}
 
-      {/* RIGHT SIDE — LINKS */}
-      <nav className="nav-links">
-        <Link to="/">Home</Link>
 
-        {!isLoggedIn ? (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/registration">Registration</Link>
-          </>
-        ) : (
-          <Link to="/logout">Logout</Link>
-        )}
-      </nav>
+        {/* RIGHT SIDE — LINKS */}
+        <nav className="nav-links flex gap-20">
+          <Link className="header-logo" to="/">
+            <img src={logo} alt="BurnByte Logo" className="" />
+          </Link>
+
+          <Link to="/">Home</Link>
+
+          {!isLoggedIn ? (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/registration">Registration</Link>
+            </>
+          ) : (
+            <Link to="/logout">Logout</Link>
+          )}
+        </nav>
+      </div>
     </header>
   );
 }
