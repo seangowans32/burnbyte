@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { AuthAPI } from '../api.js';
+import { useNavigate } from 'react-router-dom';
+
 
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +12,7 @@ const RegistrationForm = () => {
   const [retypePassword, setRetypePassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   // AOS Animations
   useEffect(() => {
@@ -39,6 +42,10 @@ const RegistrationForm = () => {
       setEmail('');
       setPassword('');
       setRetypePassword('');
+      // Redirect to home page after successful login
+      setTimeout(() => {
+        navigate('/Login');
+      }, 1000);
     } catch (error) {
       setMessage(error.message || 'Registration failed. Please try again.');
     } finally {
