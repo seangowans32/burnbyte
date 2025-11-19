@@ -1,4 +1,3 @@
-/* ====== HEADER BASE ====== */
 .header {
   position: fixed;
   width: 100%;
@@ -10,34 +9,30 @@
   z-index: 99;
 }
 
-/* Header background when scrolling */
 .header.scroll-active {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px 0;
 }
 
-/* ====== LOGO STYLING ====== */
+.header.scroll-active .header-logo {
+  width: 50px;
+  height: 50px;
+}
+
 .header-logo {
-  width: 70px;               /* Final size */
+  width: 70px;
   height: 70px;
   object-fit: contain;
-
   margin-right: auto;
   cursor: pointer;
   display: block;
-
-  /* Soft constant shadow */
-  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
-  transition: 0.25s ease-in-out;
+  transition: all ease-in-out 0.2s;
 }
 
-/* Glow on hover */
 .header-logo:hover {
-  filter: drop-shadow(0 0 10px #ff7b00);  /* orange glow */
   transform: scale(1.05);
 }
 
-/* ====== NAVIGATION ====== */
 .nav-links {
   display: flex;
   align-items: center;
@@ -53,6 +48,111 @@
   transition: 0.2s;
 }
 
-.header a:hover {
-  opacity: 0.7;
+/* Hamburger */
+.header .icon-hamburger {
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+}
+
+.header .icon-hamburger span,
+.header .icon-hamburger span:before,
+.header .icon-hamburger span:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: var(--white);
+  transition: background 0s 0.3s;
+}
+
+.header .icon-hamburger span {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header .icon-hamburger span:before {
+  content: '';
+  top: -6px;
+  transition-property: top, transform;
+  transition-duration: 0.3s, 0.3s;
+  transition-delay: 0.3s, 0s;
+}
+
+.header .icon-hamburger span:after {
+  content: '';
+  bottom: -6px;
+  transition-property: bottom, transform;
+  transition-duration: 0.3s, 0.3s;
+  transition-delay: 0.3s, 0s;
+}
+
+.menu-active .icon-hamburger span {
+  background: none;
+}
+
+.menu-active .icon-hamburger span:before {
+  top: 0;
+  transform: rotate(45deg);
+  transition-delay: 0s, 0.3s;
+}
+
+.menu-active .icon-hamburger span:after {
+  bottom: 0;
+  transform: rotate(-45deg);
+  transition-delay: 0s, 0.3s;
+}
+
+.site-responsive-menu {
+  width: max-content;
+  height: max-content;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  overflow-y: auto;
+  z-index: 0;
+  transform: translateX(100%);
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 100px 5%;
+  transition: all ease-in-out 0.4s;
+  display: none;
+}
+
+.site-responsive-menu.menu-active {
+  transform: translateX(0);
+}
+
+.site-responsive-menu .nav-links {
+  text-align: center;
+}
+
+.link-wrap {
+  flex: 0 0 100%;
+  padding: 5px 0;
+}
+
+.link-wrap a {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .header .icon-hamburger {
+    display: inline-block;
+  }
+
+  .site-responsive-menu {
+    display: block;
+  }
 }

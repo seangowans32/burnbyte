@@ -37,14 +37,14 @@ mongoose
     w: 'majority'
   })
   .then(() => {
-    console.log("✅ Connected to the database successfully!");
+    console.log("Connected to the database successfully!");
     console.log("Database name:", mongoose.connection.name);
   })
   .catch((err) => {
-    console.error("❌ Database connection error:", err.message);
+    console.error("Database connection error:", err.message);
     console.error("MongoDB URI being used:", mongoUriDisplay);
     if (!config.mongoUri || config.mongoUri.includes('localhost')) {
-      console.error("⚠️  WARNING: MONGODB_URI environment variable is not set!");
+      console.error("WARNING: MONGODB_URI environment variable is not set!");
       console.error("Please set MONGODB_URI in your Render environment variables.");
     }
     console.error("Server will continue running, but API endpoints may not work.");
@@ -69,16 +69,16 @@ if (config.env === 'production') {
   
   // Check if the build directory exists
   if (!fs.existsSync(clientBuildPath)) {
-    console.error('❌ ERROR: Client build directory not found at:', clientBuildPath);
+    console.error('ERROR: Client build directory not found at:', clientBuildPath);
     console.error('Make sure the build command completed successfully.');
   } else {
-    console.log('✅ Client build directory found');
+    console.log('Client build directory found');
     // Check if index.html exists
     const indexPath = path.join(clientBuildPath, 'index.html');
     if (fs.existsSync(indexPath)) {
-      console.log('✅ index.html found');
+      console.log('index.html found');
     } else {
-      console.error('❌ index.html not found at:', indexPath);
+      console.error('index.html not found at:', indexPath);
     }
   }
   
@@ -115,6 +115,7 @@ if (config.env === 'production') {
       }
     });
   });
+
 } else {
   // Development root route
   app.get("/", (req, res) => {
@@ -127,11 +128,12 @@ if (config.env === 'production') {
 
 // Start server
 app.listen(config.port, (err) => {
-  if (err) {
+  if(err) {
     console.error(err);
   }
+
   console.info(`Server started on port ${config.port}`);
-  
+
   // Start the daily reset scheduler (runs at midnight)
   startDailyResetScheduler();
 });

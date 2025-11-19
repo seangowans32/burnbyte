@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import DailyHistory from "../models/dailyHistory.model.js";
 import config from "../../config/config.js";
 
 // REGISTER new user
@@ -285,6 +286,35 @@ export const getUserData = async (req, res) => {
     
     res.json({ user });
   } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// GET user history (daily calories and maintain calories over time)
+export const getHistory = async (req, res) => {
+  try {
+    const userId = req.auth._id;
+    
+    // Get history records for this user, sorted by date (newest first)
+    // In testing mode, we might have many entries, so increase limit
+    const history = await DailyHistory.find({ user: userId })
+      .sort({ date: -1 }) // Most recent first
+      .limit(100) // Get last 100 entries (for testing) or 30 days (for production)
+      .select('date maintainCalories dailyCalories');
+    
+    console.log(`[API] Returning ${history.length} history entries for user ${userId}`);
+    
+    // Format the data for the frontend
+    // Keep newest first (already sorted by date: -1)
+    const formattedHistory = history.map(record => ({
+      date: record.date.toISOString(), // Keep full timestamp for testing mode
+      maintainCalories: record.maintainCalories,
+      dailyCalories: record.dailyCalories
+    }));
+    
+    res.json({ history: formattedHistory });
+  } catch (err) {
+    console.error('[API] Error fetching history:', err);
     res.status(400).json({ error: err.message });
   }
 };

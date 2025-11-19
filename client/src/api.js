@@ -95,4 +95,9 @@ export const UserAPI = {
     method: 'PUT',
     body: { dailyCalories: calories }
   }),
+  
+  // Get user history (daily calories and maintain calories over time)
+  getHistory: () => apiRequest('/auth/history', {
+    method: 'GET'
+  }),
 };

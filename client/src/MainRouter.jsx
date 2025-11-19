@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm.jsx';
 import LogoutForm from './components/LogoutForm.jsx';
 import './components/Global.css';
 import './components/Header/Header.css';
+import History from './components/History/History.jsx';
 
 const MainRouter = () => {
   return (
@@ -13,6 +14,7 @@ const MainRouter = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/history" element={<History />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/logout" element={<LogoutForm />} />
         <Route path="/registration" element={<RegistrationForm />} />

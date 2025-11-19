@@ -26,11 +26,11 @@ const ResultBar = ({ calories, dailyCalories }) => {
   };
 
   const getProgressTitle = () => {
-    if (!calories) return "Complete your body calculator to see your progress";
-    
+    if(!calories) return "Complete your body calculator to see your progress";
+
     const { cut, maintain, bulk } = calories;
-    
-    if (dailyCalories < cut) {
+
+    if(dailyCalories < cut) {
       return "You can eat more - Keep going!";
     } else if (dailyCalories >= cut && dailyCalories < maintain) {
       return "You're in the Cut zone - Great progress!";
@@ -59,7 +59,7 @@ const ResultBar = ({ calories, dailyCalories }) => {
           <div className="bulk-line" style={{left: bulk()}}></div>
         </div>
 
-        <p className="daily-calories">Daily Calories: {dailyCalories} kcal</p>
+        <p className="daily-calories">Daily Calories: {dailyCalories} cal</p>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import 'aos/dist/aos.css';
 import { AuthAPI } from '../api.js';
 import { useNavigate } from 'react-router-dom';
 
-
 const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -24,9 +23,9 @@ const RegistrationForm = () => {
     setMessage('');
     setIsLoading(true);
 
-    if (password !== retypePassword) {
-        alert("Passwords do not match.");
-        return;
+    if(password !== retypePassword) {
+      alert("Passwords do not match.");
+      return;
     }
 
     try {
@@ -42,10 +41,12 @@ const RegistrationForm = () => {
       setEmail('');
       setPassword('');
       setRetypePassword('');
+
       // Redirect to home page after successful login
       setTimeout(() => {
         navigate('/Login');
       }, 1000);
+
     } catch (error) {
       setMessage(error.message || 'Registration failed. Please try again.');
     } finally {

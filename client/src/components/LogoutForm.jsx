@@ -21,31 +21,32 @@ const LogoutForm = () => {
 
     try {
       await AuthAPI.logout();
-      
+
       // Clear user data from localStorage
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      
+
       // Dispatch custom event to update Header
       window.dispatchEvent(new Event('authChange'));
-      
+
       setMessage('Logout successful! Redirecting...');
-      
+
       // Redirect to home page after successful logout
       setTimeout(() => {
         navigate('/');
       }, 1000);
+
     } catch (error) {
       setMessage(error.message || 'Logout failed. Please try again.');
       setIsLoading(false);
-      
+
       // Even if API call fails, clear local storage and redirect
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      
+
       // Dispatch custom event to update Header
       window.dispatchEvent(new Event('authChange'));
-      
+
       setTimeout(() => {
         navigate('/');
       }, 2000);
@@ -67,20 +68,14 @@ const LogoutForm = () => {
 
             <div className="logout-content flex gap-10">
               <p>Are you sure you want to logout?</p>
-              
+
               <form onSubmit={handleLogout}>
                 <button className='frontend-button' type='submit' disabled={isLoading}>
                   {isLoading ? 'Logging out...' : 'Logout'}
                 </button>
               </form>
-              
-              <button 
-                className='frontend-button secondary' 
-                onClick={() => navigate('/')}
-                disabled={isLoading}
-              >
-                Cancel
-              </button>
+
+              <button className='frontend-button secondary' onClick={() => navigate('/')} disabled={isLoading}>Cancel</button>
             </div>
           </div>
         </div>
