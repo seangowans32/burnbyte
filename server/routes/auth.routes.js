@@ -9,7 +9,8 @@ import {
   removeFavoriteFood,
   updateFavoriteFoodQuantity,
   updateDailyCalories,
-  getUserData
+  getUserData,
+  getHistory
 } from "../controllers/auth.controller.js";
 
 const router = express.Router();
@@ -21,6 +22,7 @@ router.get("/logout", logout);
 
 // Protected routes (require authentication)
 router.get("/user", requireSignin, getUserData);
+router.get("/history", requireSignin, getHistory);
 router.put("/body-data", requireSignin, updateBodyData);
 router.post("/favorite-foods", requireSignin, addFavoriteFood);
 router.delete("/favorite-foods", requireSignin, removeFavoriteFood);

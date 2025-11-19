@@ -16,12 +16,13 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
   // Load saved data when component mounts (only once)
   useEffect(() => {
     // Only load if we haven't loaded data yet
-    if (dataLoaded) return;
+    if(dataLoaded) return;
 
     const loadSavedData = async () => {
       // Check if user is logged in first (check localStorage)
       const savedUser = localStorage.getItem('user');
-      if (!savedUser) {
+
+      if(!savedUser) {
         setIsLoading(false);
         setDataLoaded(true);
         return; // User not logged in, skip API call
@@ -29,30 +30,33 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
 
       try {
         const response = await AuthAPI.getUser();
-        if (response.user && response.user.bodyData) {
+
+        if(response.user && response.user.bodyData) {
           const bodyData = response.user.bodyData;
-          
+
           // Mark that we have existing data
           setHasExistingData(true);
-          
+
           // Load saved data (only on first mount, dataLoaded flag prevents reloading)
-          if (bodyData.weight) setWeight(String(bodyData.weight));
-          if (bodyData.height) setHeight(String(bodyData.height));
-          if (bodyData.gender) setGender(bodyData.gender);
-          if (bodyData.activityLevel) setActivityLevel(bodyData.activityLevel);
-          if (bodyData.age) setAge(String(bodyData.age));
-          
+          if(bodyData.weight) setWeight(String(bodyData.weight));
+          if(bodyData.height) setHeight(String(bodyData.height));
+          if(bodyData.gender) setGender(bodyData.gender);
+          if(bodyData.activityLevel) setActivityLevel(bodyData.activityLevel);
+          if(bodyData.age) setAge(String(bodyData.age));
+
           // If calories are saved, update parent component
-          if (bodyData.calories && bodyData.calories.cut) {
+          if(bodyData.calories && bodyData.calories.cut) {
             onCaloriesCalculated(bodyData.calories);
           }
         }
+
       } catch (error) {
         // User might not be logged in or session expired - handle silently
         // Don't log to console, just proceed without saved data
-        if (error.message && !error.message.includes('Unauthorized')) {
+        if(error.message && !error.message.includes('Unauthorized')) {
           console.error('Error loading saved data:', error.message);
         }
+
       } finally {
         setIsLoading(false);
         setDataLoaded(true);
@@ -79,7 +83,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
     e.preventDefault();
     setIsSaving(true);
     setSaveMessage('');
-    
+
     try {
       const bmr = calculateBMR();
       const tdee = calculateTDEE(bmr);
@@ -88,7 +92,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
         maintain: Math.round(tdee),
         bulk: Math.round(tdee + 500)
       };
-      
+
       // Save to backend
       await UserAPI.updateBodyData({
         weight: parseFloat(weight),
@@ -98,20 +102,21 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
         activityLevel: parseFloat(activityLevel),
         calories: calculatedCalories
       });
-      
+
       // Update parent component
       onCaloriesCalculated(calculatedCalories);
-      
+
       // Show appropriate message based on whether we're updating or creating new
       const message = hasExistingData 
         ? 'Data updated successfully!' 
         : 'Data saved successfully!';
       setSaveMessage(message);
-      
+
       // Mark that we now have existing data
       setHasExistingData(true);
-      
+
       setTimeout(() => setSaveMessage(''), 3000);
+
     } catch (error) {
       setSaveMessage(error.message || 'Failed to save data. Please try again.');
       // Still calculate and show results even if save fails
@@ -122,12 +127,13 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
         maintain: Math.round(tdee),
         bulk: Math.round(tdee + 500)
       });
+
     } finally {
       setIsSaving(false);
     }
   };
 
-  if (isLoading) {
+  if(isLoading) {
     return (
       <div className="calorie-calculator">
         <p>Loading saved data...</p>
@@ -148,6 +154,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             required 
           />
         </div>
+
         <div className='form-group'>
           <label>Height (cm):</label>
           <input 
@@ -158,6 +165,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             required 
           />
         </div>
+
         <div className='form-group'>
           <label>Age (years):</label>
           <input 
@@ -168,6 +176,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             required 
           />
         </div>
+
         <div className='form-group'>
           <label>Gender:</label>
           <select 
@@ -179,6 +188,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             <option value="female">Female</option>
           </select>
         </div>
+
         <div className='form-group'>
           <label>Activity Level:</label>
           <select 
@@ -193,9 +203,11 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             <option value={1.9}>Extra active (very hard exercise, physical job, or training twice a day)</option>
           </select>
         </div>
+
         <button className='frontend-button' type="submit" disabled={isSaving}>
           {isSaving ? (hasExistingData ? 'Updating...' : 'Saving...') : (hasExistingData ? 'Update & Recalculate' : 'Calculate & Save')}
         </button>
+
         {saveMessage && (
           <p className={`info-box ${saveMessage.includes('successfully') ? '' : 'error'}`} style={{ marginTop: '10px' }}>
             {saveMessage}

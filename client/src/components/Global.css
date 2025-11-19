@@ -130,9 +130,18 @@ img {
 }
 
 .App-body {
-  background-color: rgba(0, 0, 0, 0.5);
   padding: 120px 0 60px;
-  min-height: 100vh;
+  position: relative;
+}
+
+.App-body:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .user-title {
@@ -313,4 +322,22 @@ select:focus {
 
 .frontend-button:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .App-body {
+    padding: 200px 0 60px;
+  }
+
+  .col {
+    flex: 0 0 100%;
+  }
+
+  .body-specs .col-1 {
+    order: 2;
+  }
+
+  .col-2 {
+    order: 1;
+  }
 }

@@ -215,7 +215,7 @@ function FoodIntake({ onCaloriesUpdate }) {
 
             <div className='food-favorites'>
                 <h3>Favorite Foods</h3>
-                <p>Daily Calories: {dailyCalories} kcal</p>
+                <p>Daily Calories: {dailyCalories} cal</p>
 
                 {favorites.length === 0 ? (
                   <p>No favorite foods yet. Add some foods above!</p>

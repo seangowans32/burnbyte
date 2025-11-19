@@ -26,20 +26,21 @@ const LoginForm = () => {
         email,
         password
       });
-      
+
       // Save user data to localStorage for quick access
-      if (response.user) {
+      if(response.user) {
         localStorage.setItem('user', JSON.stringify(response.user));
         // Dispatch custom event to update Header
         window.dispatchEvent(new Event('authChange'));
       }
-      
+
       setMessage('Login successful! Redirecting...');
-      
+
       // Redirect to home page after successful login
       setTimeout(() => {
         navigate('/');
       }, 1000);
+
     } catch (error) {
       setMessage(error.message || 'Login failed. Please check your credentials.');
       setIsLoading(false);

@@ -16,10 +16,12 @@ const BodyCalculator = () => {
     const loadUser = async () => {
       // First check localStorage for quick access
       const savedUser = localStorage.getItem('user');
-      if (savedUser) {
+
+      if(savedUser) {
         try {
           const parsedUser = JSON.parse(savedUser);
           setUser(parsedUser);
+
         } catch (error) {
           // If localStorage data is corrupted, try API
         }
@@ -28,14 +30,16 @@ const BodyCalculator = () => {
       // Try to fetch fresh user data from API
       try {
         const response = await AuthAPI.getUser();
-        if (response.user) {
+
+        if(response.user) {
           setUser(response.user);
           // Update localStorage with fresh data
           localStorage.setItem('user', JSON.stringify(response.user));
         }
+
       } catch (error) {
         // User not logged in or session expired - use localStorage data if available
-        if (!savedUser) {
+        if(!savedUser) {
           setUser(null);
         }
       }
@@ -94,12 +98,12 @@ const BodyCalculator = () => {
       <ResultBar calories={calories} dailyCalories={dailyCalories} />
 
       <div className="flex gap-40">
-        <div className='col'>
+        <div className='col col-1'>
           <CalCalculator onCaloriesCalculated={handleCaloriesCalculated} onFieldFocus={handleFocus} />
           <AdditionalInfo info={info} />
         </div>
 
-        <div className='col'>
+        <div className='col col-2'>
           {calories ? (
             <FoodIntake onCaloriesUpdate={handleDailyCaloriesUpdate} />
           ) : (
