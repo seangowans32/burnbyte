@@ -43,6 +43,7 @@ mongoose
   .catch((err) => {
     console.error("Database connection error:", err.message);
     console.error("MongoDB URI being used:", mongoUriDisplay);
+
     if (!config.mongoUri || config.mongoUri.includes('localhost')) {
       console.error("WARNING: MONGODB_URI environment variable is not set!");
       console.error("Please set MONGODB_URI in your Render environment variables.");
@@ -57,7 +58,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 mongoose.connection.on("disconnected", () => {
-  console.warn("⚠️  MongoDB disconnected. Attempting to reconnect...");
+  console.warn("MongoDB disconnected. Attempting to reconnect...");
 });
 
 // Serve static files from the React app in production
