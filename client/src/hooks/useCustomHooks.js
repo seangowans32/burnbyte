@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // Scroll Hook - Header scroll effects
 export const useScroll = () => {
@@ -18,22 +19,30 @@ export const useScroll = () => {
   return isScrolled;
 };
 
+
+// Header Current Menu Item
+export const useCurrentMenuItem = () => {
+  const location = useLocation();
+  return location.pathname;
+}
+
 // Hamburger Hook - Toggle responsive menu
 export const useHamburger = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
 
   useEffect(() => {
     const iconHamburger = document.querySelector('.icon-hamburger');
+
     const handleClick = () => {
       setIsMenuActive(prev => !prev);
     };
 
-    if (iconHamburger) {
+    if(iconHamburger) {
       iconHamburger.addEventListener('click', handleClick);
     }
 
     return () => {
-      if (iconHamburger) {
+      if(iconHamburger) {
         iconHamburger.removeEventListener('click', handleClick);
       }
     };
@@ -41,15 +50,19 @@ export const useHamburger = () => {
 
   useEffect(() => {
     const siteResponsiveMenu = document.querySelector('.site-responsive-menu');
-    if (isMenuActive) {
-      if (siteResponsiveMenu) {
+
+    if(isMenuActive) {
+      if(siteResponsiveMenu) {
         siteResponsiveMenu.classList.add('menu-active');
       }
+
       document.body.classList.add('menu-active');
+
     } else {
-      if (siteResponsiveMenu) {
+      if(siteResponsiveMenu) {
         siteResponsiveMenu.classList.remove('menu-active');
       }
+
       document.body.classList.remove('menu-active');
     }
   }, [isMenuActive]);

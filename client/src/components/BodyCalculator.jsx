@@ -79,42 +79,50 @@ const BodyCalculator = () => {
   };
 
   return (
-    <div className="body-specs">
-      {user ? (
-        <div className="user-title">
-          <h3>Welcome, {user.username}!</h3>
-          <p className="text-small" style={{ marginTop: '5px', opacity: 0.8 }}>
-            You are logged in and your data will be saved.
-          </p>
-        </div>
-      ) : (
-        <div className="user-title" style={{ marginBottom: '20px' }}>
-          <p className="text-small" style={{ marginTop: '5px', opacity: 0.8 }}>
-            Please <a href="/login">login</a> to save your data.
-          </p>
-        </div>
-      )}
+    <>
+      <div className="App">
+        <div className="App-body">
+          <div className='container' data-aos="zoom-in-up">
+            <div className="body-specs">
+              {user ? (
+                <div className="user-title">
+                  <h3>Welcome, {user.username}!</h3>
+                  <p className="text-small" style={{ marginTop: '5px', opacity: 0.8 }}>
+                    You are logged in and your data will be saved.
+                  </p>
+                </div>
+              ) : (
+                <div className="user-title" style={{ marginBottom: '20px' }}>
+                  <p className="text-small" style={{ marginTop: '5px', opacity: 0.8 }}>
+                    Please <a href="/login">login</a> to save your data.
+                  </p>
+                </div>
+              )}
 
-      <ResultBar calories={calories} dailyCalories={dailyCalories} />
+              <ResultBar calories={calories} dailyCalories={dailyCalories} />
 
-      <div className="flex gap-40">
-        <div className='col col-1'>
-          <CalCalculator onCaloriesCalculated={handleCaloriesCalculated} onFieldFocus={handleFocus} />
-          <AdditionalInfo info={info} />
-        </div>
+              <div className="flex gap-40">
+                <div className='col col-1'>
+                  <CalCalculator onCaloriesCalculated={handleCaloriesCalculated} onFieldFocus={handleFocus} />
+                  <AdditionalInfo info={info} />
+                </div>
 
-        <div className='col col-2'>
-          {calories ? (
-            <FoodIntake onCaloriesUpdate={handleDailyCaloriesUpdate} />
-          ) : (
-            <div className="food-intake-placeholder">
-              <h3>Complete Your Body Calculator First</h3>
-              <p>Please fill out the calorie calculator form to get your maintain, cut, and bulk calorie goals. Once you have your goals, you'll be able to add your favorite foods and track your daily intake!</p>
+                <div className='col col-2'>
+                  {calories ? (
+                    <FoodIntake onCaloriesUpdate={handleDailyCaloriesUpdate} />
+                  ) : (
+                    <div className="food-intake-placeholder">
+                      <h3>Complete Your Body Calculator First</h3>
+                      <p>Please fill out the calorie calculator form to get your maintain, cut, and bulk calorie goals. Once you have your goals, you'll be able to add your favorite foods and track your daily intake!</p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

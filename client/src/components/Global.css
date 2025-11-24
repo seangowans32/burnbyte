@@ -66,7 +66,6 @@ body {
   background: linear-gradient(-45deg, var(--orange), var(--red), var(--blue), var(--teal));
 	background-size: 400% 400%;
 	animation: gradient 30s ease infinite;
-	height: 100vh;
   font-weight: 300;
 }
 
@@ -95,6 +94,10 @@ body {
 .flex {
   display: flex;
   flex-wrap: wrap;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 img {
@@ -142,6 +145,7 @@ img {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 .user-title {
@@ -240,7 +244,7 @@ a:hover {
 
 .login-form .frontend-button {
   flex: 1;
-  width:100%;
+  width: 100%;
 }
 
 .form-container {
@@ -318,6 +322,7 @@ select:focus {
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .frontend-button:hover {

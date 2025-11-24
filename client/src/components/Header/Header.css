@@ -48,6 +48,10 @@
   transition: 0.2s;
 }
 
+.header a.active {
+  color: var(--blue);
+}
+
 /* Hamburger */
 .header .icon-hamburger {
   width: 18px;
@@ -111,7 +115,7 @@
 }
 
 .site-responsive-menu {
-  width: max-content;
+  width: 90%;
   height: max-content;
   position: fixed;
   bottom: 0;

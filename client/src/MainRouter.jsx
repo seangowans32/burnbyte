@@ -1,12 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header.jsx';
-import Home from './components/Home.jsx';
+import Home from './components/Home/Home.jsx';
 import RegistrationForm from './components/RegistrationForm.jsx';
 import LoginForm from './components/LoginForm.jsx';
 import LogoutForm from './components/LogoutForm.jsx';
 import './components/Global.css';
 import './components/Header/Header.css';
 import History from './components/History/History.jsx';
+import BodyCalculator from './components/BodyCalculator.jsx';
 
 const MainRouter = () => {
   return (
@@ -14,6 +15,7 @@ const MainRouter = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/body-calculator" element={<BodyCalculator />} />
         <Route path="/history" element={<History />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/logout" element={<LogoutForm />} />
