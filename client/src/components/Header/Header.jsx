@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logo from "../../assets/main-logo.png";
-import { useHamburger } from '../../hooks/useCustomHooks';
+import { useHamburger, useCurrentMenuItem } from '../../hooks/useCustomHooks';
 import "./Header.css";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isMenuActive = useHamburger();
+  const currentPath = useCurrentMenuItem();
 
   useEffect(() => {
     const checkAuthStatus = () => {
@@ -32,17 +33,18 @@ export default function Header() {
             <img src={logo} alt="BurnByte Logo"/>
           </Link>
 
-          <Link className="desktop-only" to="/">Home</Link>
+          <Link className={`desktop-only ${currentPath === '/' ? 'active' : ''}`} to="/">Home</Link>
 
           {!isLoggedIn ? (
             <>
-              <Link className="desktop-only" to="/login">Login</Link>
-              <Link className="desktop-only" to="/registration">Registration</Link>
+              <Link className={`desktop-only ${currentPath === '/login' ? 'active' : ''}`} to="/login">Login</Link>
+              <Link className={`desktop-only ${currentPath === '/registration' ? 'active' : ''}`} to="/registration">Registration</Link>
             </>
           ) : (
             <>
-              <Link className="desktop-only" to="/history">History</Link>
-              <Link className="desktop-only" to="/logout">Logout</Link>
+              <Link className={`desktop-only ${currentPath === '/body-calculator' ? 'active' : ''}`} to="/body-calculator">Body Calculator</Link>
+              <Link className={`desktop-only ${currentPath === '/history' ? 'active' : ''}`} to="/history">History</Link>
+              <Link className={`desktop-only ${currentPath === '/logout' ? 'active' : ''}`} to="/logout">Logout</Link>
             </>
           )}
 
@@ -55,27 +57,31 @@ export default function Header() {
       <div className={`site-responsive-menu ${isMenuActive ? 'menu-active' : ''}`}>
         <nav className="nav-links flex gap-20">
           <div className="link-wrap">
-            <Link to="/">Home</Link>
+            <Link className={currentPath === '/' ? 'active' : ''} to="/">Home</Link>
           </div>
 
           {!isLoggedIn ? (
             <>
               <div className="link-wrap">
-                <Link to="/login">Login</Link>
+                <Link className={currentPath === '/login' ? 'active' : ''} to="/login">Login</Link>
               </div>
 
               <div className="link-wrap">
-                <Link to="/registration">Registration</Link>
+                <Link className={currentPath === '/registration' ? 'active' : ''} to="/registration">Registration</Link>
               </div>
             </>
           ) : (
             <>
               <div className="link-wrap">
-                <Link to="/history">History</Link>
+                <Link className={currentPath === '/body-calculator' ? 'active' : ''} to="/body-calculator">Body Calculator</Link>
               </div>
 
               <div className="link-wrap">
-                <Link to="/logout">Logout</Link>
+                <Link className={currentPath === '/history' ? 'active' : ''} to="/history">History</Link>
+              </div>
+
+              <div className="link-wrap">
+                <Link className={currentPath === '/logout' ? 'active' : ''} to="/logout">Logout</Link>
               </div>
             </>
           )}
