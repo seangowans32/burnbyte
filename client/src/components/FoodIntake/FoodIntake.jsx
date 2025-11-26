@@ -205,6 +205,7 @@ function FoodIntake({ onCaloriesUpdate }) {
                         type="number"
                         value={calories}
                         onChange={(e) => setCalories(e.target.value)}
+                        onWheel={(e) => e.target.blur()}
                         placeholder="Calories"
                         required
                     />

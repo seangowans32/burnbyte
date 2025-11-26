@@ -151,6 +151,7 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             value={weight} 
             onChange={(e) => setWeight(e.target.value)} 
             onFocus={() => onFieldFocus('weight')} 
+            onWheel={(e) => e.target.blur()}
             required 
           />
         </div>
@@ -161,7 +162,8 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             type="number" 
             value={height} 
             onChange={(e) => setHeight(e.target.value)} 
-            onFocus={() => onFieldFocus('height')} 
+            onFocus={() => onFieldFocus('height')}
+            onWheel={(e) => e.target.blur()}
             required 
           />
         </div>
@@ -172,7 +174,8 @@ const CalCalculator = ({ onCaloriesCalculated, onFieldFocus }) => {
             type="number" 
             value={age} 
             onChange={(e) => setAge(e.target.value)} 
-            onFocus={() => onFieldFocus('age')} 
+            onFocus={() => onFieldFocus('age')}
+            onWheel={(e) => e.target.blur()}
             required 
           />
         </div>
