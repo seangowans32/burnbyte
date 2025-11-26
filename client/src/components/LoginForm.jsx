@@ -36,9 +36,9 @@ const LoginForm = () => {
 
       setMessage('Login successful! Redirecting...');
 
-      // Redirect to home page after successful login
+      // Redirect to body calculator page after successful login
       setTimeout(() => {
-        navigate('/');
+        navigate('/body-calculator');
       }, 1000);
 
     } catch (error) {

@@ -7,50 +7,27 @@ import introImage from '../../assets/img-3.jpg';
 import introImage2 from '../../assets/img-1.jpg';
 import introImage3 from '../../assets/img-6.jpg';
 import introImage4 from '../../assets/img-7.jpg';
-import { AuthAPI } from '../../api.js';
 import './Home.css';
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Check if user is logged in
   useEffect(() => {
-    const loadUser = async () => {
-      // First check localStorage for quick access
-      const savedUser = localStorage.getItem('user');
-
-      if(savedUser) {
-        try {
-          const parsedUser = JSON.parse(savedUser);
-          setUser(parsedUser);
-        } catch (error) {
-          // If localStorage data is corrupted, try API
-        }
-      }
-
-      // Try to fetch fresh user data from API
-      try {
-        const response = await AuthAPI.getUser();
-
-        if(response.user) {
-          setUser(response.user);
-          // Update localStorage with fresh data
-          localStorage.setItem('user', JSON.stringify(response.user));
-        }
-      } catch (error) {
-        // User not logged in or session expired - use localStorage data if available
-        if(!savedUser) {
-          setUser(null);
-        }
-      }
+    const checkAuthStatus = () => {
+      const user = localStorage.getItem("user");
+      setIsLoggedIn(!!user);
     };
 
-    loadUser();
-  }, []);
+    checkAuthStatus();
+    window.addEventListener("storage", checkAuthStatus);
+    window.addEventListener("authChange", checkAuthStatus);
 
-  // AOS Animations
-  useEffect(() => {
-    AOS.init();
+    return () => {
+      window.removeEventListener("storage", checkAuthStatus);
+      window.removeEventListener("authChange", checkAuthStatus);
+      AOS.init();
+    };
   }, []);
 
   return(
@@ -66,12 +43,12 @@ export default function Home() {
               <p>The ultimate body calculator and food intake tracker.</p>
               <p>Create an account to get started.</p>
 
-              {user ? (
-                  <a href="/body-calculator" className="frontend-button">Body Calculator</a>
+              {isLoggedIn ? (
+                  <Link className="frontend-button" to="/body-calculator">Body Calculator</Link>
                 ) : (
                   <div className="flex justify-center gap-20">
-                    <a href="/login" className="frontend-button">Login</a>
-                    <a href="/registration" className="frontend-button">Get Started</a>
+                    <Link className="frontend-button" to="/login">Login</Link>
+                    <Link className="frontend-button" to="/registration">Get Started</Link>
                   </div>
                 )}
             </div>
@@ -91,12 +68,12 @@ export default function Home() {
                 <p>Using proven formulas that factor in your weight, height, age, gender, and activity level, BurnByte calculates your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) to determine the exact calories you need to achieve your goals.</p>
                 <p>Track your daily food intake, save your favorite foods, and monitor your progress over time—all in one convenient platform designed to help you reach your fitness aspirations.</p>
 
-                {user ? (
-                  <a href="/body-calculator" className="frontend-button">Body Calculator</a>
+                {isLoggedIn ? (
+                  <Link className="frontend-button" to="/body-calculator">Body Calculator</Link>
                 ) : (
                   <div className="flex gap-20">
-                    <a href="/login" className="frontend-button">Login</a>
-                    <a href="/registration" className="frontend-button">Get Started</a>
+                    <Link className="frontend-button" to="/login">Login</Link>
+                    <Link className="frontend-button" to="/registration">Get Started</Link>
                   </div>
                 )}
               </div>
@@ -113,12 +90,12 @@ export default function Home() {
                 <p><strong>Smart Daily Resets:</strong> Your daily calorie count automatically resets at midnight, keeping you on track without manual intervention.</p>
                 <p>Join BurnByte today and take control of your nutrition journey with precision and ease.</p>
 
-                {user ? (
-                  <a href="/body-calculator" className="frontend-button">Body Calculator</a>
+                {isLoggedIn ? (
+                  <Link className="frontend-button" to="/body-calculator">Body Calculator</Link>
                 ) : (
                   <div className="flex gap-20">
-                    <a href="/login" className="frontend-button">Login</a>
-                    <a href="/registration" className="frontend-button">Get Started</a>
+                    <Link className="frontend-button" to="/login">Login</Link>
+                    <Link className="frontend-button" to="/registration">Get Started</Link>
                   </div>
                 )}
               </div>
@@ -148,12 +125,12 @@ export default function Home() {
                 <p><strong>4. Track Your Progress:</strong> Log your daily meals, save your favorite foods, and watch as you progress toward your fitness goals. Our automatic daily reset ensures you're always tracking accurately.</p>
                 <p>Ready to transform your nutrition? Join thousands of users who are already achieving their fitness goals with BurnByte.</p>
 
-                {user ? (
-                  <a href="/body-calculator" className="frontend-button">Body Calculator</a>
+                {isLoggedIn ? (
+                  <Link className="frontend-button" to="/body-calculator">Body Calculator</Link>
                 ) : (
                   <div className="flex gap-20">
-                    <a href="/login" className="frontend-button">Login</a>
-                    <a href="/registration" className="frontend-button">Get Started</a>
+                    <Link className="frontend-button" to="/login">Login</Link>
+                    <Link className="frontend-button" to="/registration">Get Started</Link>
                   </div>
                 )}
               </div>
@@ -166,12 +143,12 @@ export default function Home() {
                 <h2>History & Tracking</h2>
                 <p>Track your progress over time with our comprehensive history and tracking features. View your daily calorie intake, favorite foods, and see how your daily intake compares to your goals.</p>
 
-                {user ? (
-                  <a href="/history" className="frontend-button">History</a>
+                {isLoggedIn ? (
+                  <Link className="frontend-button" to="/history">History</Link>
                 ) : (
                   <div className="flex gap-20">
-                    <a href="/login" className="frontend-button">Login</a>
-                    <a href="/registration" className="frontend-button">Get Started</a>
+                    <Link className="frontend-button" to="/login">Login</Link>
+                    <Link className="frontend-button" to="/registration">Get Started</Link>
                   </div>
                 )}
               </div>
