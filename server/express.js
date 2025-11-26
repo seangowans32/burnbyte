@@ -41,11 +41,13 @@ app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (same-origin requests, mobile apps, curl requests)
     // In production, same-origin requests (from the same domain) won't have an origin header
-    if (!origin) {
+    if(!origin) {
       return callback(null, true);
     }
-    if (allowedOrigins.indexOf(origin) !== -1) {
+
+    if(allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
+
     } else {
       // Log the blocked origin for debugging
       console.log('CORS blocked origin:', origin);

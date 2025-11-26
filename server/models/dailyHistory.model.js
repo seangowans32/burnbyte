@@ -22,14 +22,14 @@ const dailyHistorySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  
+
   // Daily calories consumed for that day
   dailyCalories: {
     type: Number,
     required: true,
     default: 0
   },
-  
+
   // Timestamp when this record was created
   createdAt: {
     type: Date,

@@ -42,7 +42,7 @@ const RegistrationForm = () => {
       setPassword('');
       setRetypePassword('');
 
-      // Redirect to home page after successful login
+      // Redirect to login page after successful registration
       setTimeout(() => {
         navigate('/Login');
       }, 1000);
