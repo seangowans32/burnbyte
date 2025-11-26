@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, trim: true, required: "Username is required", unique: "Username already exists" },
   email: { type: String, trim: true, unique: "Email already exists", required: "Email is required" },
   password: { type: String, required: "Password is required" },
-  
+
   // User's body data and calorie goals
   bodyData: {
     weight: { type: Number },
