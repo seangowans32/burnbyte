@@ -24,10 +24,11 @@ export default function Home() {
     window.addEventListener("storage", checkAuthStatus);
     window.addEventListener("authChange", checkAuthStatus);
 
+    AOS.init();
+
     return () => {
       window.removeEventListener("storage", checkAuthStatus);
       window.removeEventListener("authChange", checkAuthStatus);
-      AOS.init();
     };
   }, []);
 
