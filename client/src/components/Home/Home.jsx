@@ -1,3 +1,4 @@
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect, useState } from 'react';
@@ -35,13 +36,14 @@ export default function Home() {
       <div className="App">
         <div className="App-body home">
           <div className="banner img-container">
-            <img src={bannerLogo} alt="BurnByte Logo"/>
+            <img src={bannerLogo} alt="BurnByte fitness banner"/>
 
             <div className='container' data-aos="zoom-in-up">
-              <img src={mainLogo} alt="BurnByte Logo" />
+              <img src={mainLogo} alt="BurnByte logo" />
               <h1>Welcome to BurnByte</h1>
               <p>The ultimate body calculator and food intake tracker.</p>
-              <p>Create an account to get started.</p>
+              <p>Create an account to get started and begin tracking your nutrition with confidence.</p>
+              <p>BurnByte makes it easy to understand how your daily choices impact your long-term goals.</p>
 
               {isLoggedIn ? (
                   <Link className="frontend-button" to="/body-calculator">Body Calculator</Link>
@@ -58,7 +60,7 @@ export default function Home() {
             <div className="container flex gap-40">
               <div className="col col-img" data-aos="fade-right">
                 <div className="img-container">
-                  <img src={introImage} alt="BurnByte Logo" />
+                  <img src={introImage} alt="Person tracking calories using BurnByte" />
                 </div>
               </div>
 
@@ -102,7 +104,7 @@ export default function Home() {
 
               <div className="col col-img" data-aos="fade-up">
                 <div className="img-container">
-                  <img src={introImage2} alt="BurnByte Logo" />
+                  <img src={introImage2} alt="Healthy food options for tracking intake" />
                 </div>
               </div>
             </div>
@@ -112,7 +114,7 @@ export default function Home() {
             <div className="container flex gap-40">
               <div className="col col-img" data-aos="fade-right">
                 <div className="img-container">
-                  <img src={introImage3} alt="BurnByte Logo" />
+                  <img src={introImage3} alt="Fitness and nutrition planning with BurnByte" />
                 </div>
               </div>
 
@@ -140,8 +142,9 @@ export default function Home() {
           <div className="intro">
             <div className="container flex gap-40">
               <div className="col col-content" data-aos="fade-right">
-                <h2>History & Tracking</h2>
+                <h2>History &amp; Tracking</h2>
                 <p>Track your progress over time with our comprehensive history and tracking features. View your daily calorie intake, favorite foods, and see how your daily intake compares to your goals.</p>
+                <p><strong>Identify patterns over time:</strong> Use your history to spot trends in your eating habits, adjust your goals, and celebrate milestones as you move closer to your ideal results.</p>
 
                 {isLoggedIn ? (
                   <Link className="frontend-button" to="/history">History</Link>
@@ -155,11 +158,23 @@ export default function Home() {
 
               <div className="col col-img" data-aos="fade-left">
                 <div className="img-container">
-                  <img src={introImage4} alt="BurnByte Logo" />
+                  <img src={introImage4} alt="Progress charts and history in BurnByte" />
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="intro">
+            <div className="container flex gap-40">
+              <div className="col col-content" data-aos="fade-up">
+                <h2>Getting Started Quickly</h2>
+                <p><strong>New to BurnByte?</strong> Start by creating an account, visiting the Body Calculator page, and entering your body metrics.</p>
+                <p>Once your goals are set, head over to the Food Intake section to begin adding your meals and snacks. After a few days, review your History to see how consistent you have been and where you can improve.</p>
+                <p>BurnByte is designed to support you step-by-step as you build healthier, more sustainable habits.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </>
