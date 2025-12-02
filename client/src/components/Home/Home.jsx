@@ -8,6 +8,7 @@ import introImage from '../../assets/img-3.jpg';
 import introImage2 from '../../assets/img-1.jpg';
 import introImage3 from '../../assets/img-6.jpg';
 import introImage4 from '../../assets/img-7.jpg';
+import introImage5 from '../../assets/img-8.jpg';
 import './Home.css';
 import { Link } from "react-router-dom";
 
@@ -167,15 +168,29 @@ export default function Home() {
 
           <div className="intro">
             <div className="container flex gap-40">
-              <div className="col col-content" data-aos="fade-up">
+              <div className="col col-img" data-aos="fade-right">
+                <div className="img-container">
+                  <img src={introImage5} alt="man warming up before a workout" />
+                </div>
+              </div>
+
+              <div className="col col-content" data-aos="fade-left">
                 <h2>Getting Started Quickly</h2>
                 <p><strong>New to BurnByte?</strong> Start by creating an account, visiting the Body Calculator page, and entering your body metrics.</p>
                 <p>Once your goals are set, head over to the Food Intake section to begin adding your meals and snacks. After a few days, review your History to see how consistent you have been and where you can improve.</p>
                 <p>BurnByte is designed to support you step-by-step as you build healthier, more sustainable habits.</p>
+
+                {isLoggedIn ? (
+                  <Link className="frontend-button" to="/body-calculator">Body Calculator</Link>
+                ) : (
+                  <div className="flex gap-20">
+                    <Link className="frontend-button" to="/login">Login</Link>
+                    <Link className="frontend-button" to="/registration">Get Started</Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </>
